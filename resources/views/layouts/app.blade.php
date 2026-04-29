@@ -633,7 +633,7 @@
                     <i class="fas fa-tasks"></i><span>Kelola Tugas</span>
                 </a>
                 <a href="{{ route('pembimbing.rekap.index') }}" class="nav-link {{ request()->routeIs('pembimbing.rekap.*') ? 'active' : '' }}">
-                    <i class="fas fa-chart-bar"></i><span>Rekap & Nilai</span>
+                    <i class="fas fa-chart-bar"></i><span>Penilaian</span>
                 </a>
             </div>
             @endif

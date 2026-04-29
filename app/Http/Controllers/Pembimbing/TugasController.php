@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Pembimbing;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tugas;
-use App\Models\Submission;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -110,23 +109,5 @@ class TugasController extends Controller
             ->with('success', 'Tugas berhasil dihapus.');
     }
 
-    public function nilaiSubmission(Request $request, Submission $submission)
-    {
-        // Verify this submission belongs to a task owned by this pembimbing
-        if ($submission->tugas->pembimbing_id !== auth()->id()) {
-            abort(403);
-        }
 
-        $request->validate([
-            'nilai' => 'required|integer|min:0|max:100',
-            'komentar' => 'nullable|string',
-        ]);
-
-        $submission->update([
-            'nilai' => $request->nilai,
-            'komentar' => $request->komentar,
-        ]);
-
-        return back()->with('success', 'Nilai berhasil diberikan.');
-    }
 }

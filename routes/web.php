@@ -8,6 +8,7 @@ use App\Http\Controllers\Pembimbing\DashboardController as PembimbingDashboardCo
 use App\Http\Controllers\Pembimbing\PesertaController;
 use App\Http\Controllers\Pembimbing\AbsensiController as PembimbingAbsensiController;
 use App\Http\Controllers\Pembimbing\TugasController as PembimbingTugasController;
+use App\Http\Controllers\Pembimbing\PenilaianController;
 use App\Http\Controllers\Peserta\DashboardController as PesertaDashboardController;
 use App\Http\Controllers\Peserta\AbsensiController as PesertaAbsensiController;
 use App\Http\Controllers\Peserta\TugasController as PesertaTugasController;
@@ -38,11 +39,13 @@ Route::prefix('pembimbing')->middleware(['auth', 'role:pembimbing'])->name('pemb
     Route::get('/absensi', [PembimbingAbsensiController::class, 'index'])->name('absensi.index');
     Route::put('/absensi/{absensi}/status', [PembimbingAbsensiController::class, 'updateStatus'])->name('absensi.updateStatus');
     Route::post('/absensi/manual', [PembimbingAbsensiController::class, 'tambahManual'])->name('absensi.manual');
-    Route::get('/rekap', [PembimbingAbsensiController::class, 'rekap'])->name('rekap.index');
 
     // Tugas
     Route::resource('tugas', PembimbingTugasController::class)->parameters(['tugas' => 'tuga']);
-    Route::put('/submission/{submission}/nilai', [PembimbingTugasController::class, 'nilaiSubmission'])->name('submission.nilai');
+
+    // Penilaian
+    Route::get('/rekap', [PenilaianController::class, 'rekap'])->name('rekap.index');
+    Route::put('/submission/{submission}/nilai', [PenilaianController::class, 'nilaiSubmission'])->name('submission.nilai');
 });
 
 // ============ PESERTA ROUTES ============
